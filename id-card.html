@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Digital ID Badge</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .id-card-container {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            max-width: 400px;
+            width: 100%;
+            overflow: hidden;
+        }
+
+        .card-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 30px 20px;
+            text-align: center;
+            color: white;
+        }
+
+        .card-header h1 {
+            font-size: 24px;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+
+        .card-header p {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+
+        .card-body {
+            padding: 30px;
+        }
+
+        .photo-section {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        .photo-placeholder {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            margin: 0 auto 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 60px;
+            color: white;
+            font-weight: bold;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .photo-placeholder img {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        .info-section {
+            margin-bottom: 20px;
+        }
+
+        .info-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 12px 0;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .info-row:last-child {
+            border-bottom: none;
+        }
+
+        .info-label {
+            font-weight: 600;
+            color: #666;
+            font-size: 14px;
+        }
+
+        .info-value {
+            color: #333;
+            font-size: 14px;
+            text-align: right;
+        }
+
+        .status-badge {
+            background: #10b981;
+            color: white;
+            padding: 12px 20px;
+            border-radius: 10px;
+            text-align: center;
+            font-weight: 600;
+            font-size: 16px;
+            margin-top: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .status-badge::before {
+            content: "✓";
+            font-size: 20px;
+        }
+
+        .card-footer {
+            background: #f9fafb;
+            padding: 20px;
+            text-align: center;
+            font-size: 12px;
+            color: #666;
+        }
+
+        .qr-info {
+            margin-top: 15px;
+            padding: 15px;
+            background: #f0f9ff;
+            border-radius: 10px;
+            font-size: 13px;
+            color: #0369a1;
+        }
+
+        @media (max-width: 480px) {
+            .id-card-container {
+                max-width: 100%;
+            }
+            
+            .card-body {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="id-card-container">
+        <div class="card-header">
+            <h1>DIGITAL ID BADGE</h1>
+            <p>Official Access Credential</p>
+        </div>
+
+        <div class="card-body">
+            <div class="photo-section">
+                <div class="photo-placeholder" id="photoDisplay">
+                    JD
+                </div>
+            </div>
+
+            <div class="info-section">
+                <div class="info-row">
+                    <span class="info-label">Name:</span>
+                    <span class="info-value" id="nameDisplay">John Doe</span>
+                </div>
+                <div class="info-row">
+                    <span class="info-label">Email:</span>
+                    <span class="info-value" id="emailDisplay">john.doe@example.com</span>
+                </div>
+                <div class="info-row">
+                    <span class="info-label">Department:</span>
+                    <span class="info-value" id="departmentDisplay">Engineering</span>
+                </div>
+                <div class="info-row">
+                    <span class="info-label">ID Number:</span>
+                    <span class="info-value" id="idNumberDisplay">EMP-2024-001</span>
+                </div>
+                <div class="info-row">
+                    <span class="info-label">Approval Date:</span>
+                    <span class="info-value" id="approvalDateDisplay">Nov 17, 2025</span>
+                </div>
+            </div>
+
+            <div class="status-badge">
+                ACCESS APPROVED
+            </div>
+
+            <div class="qr-info">
+                This digital ID is valid for building access. Present this screen at the entrance for verification.
+            </div>
+        </div>
+
+        <div class="card-footer">
+            <p>Valid credential • Issued by Security</p>
+            <p style="margin-top: 5px; font-size: 11px;">Do not share this credential</p>
+        </div>
+    </div>
+
+    <script>
+        // Parse URL parameters to populate the ID card
+        function getUrlParameter(name) {
+            name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
+            const regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
+            const results = regex.exec(location.search);
+            return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
+        }
+
+        // Populate card with URL parameters
+        window.addEventListener('DOMContentLoaded', function() {
+            const name = getUrlParameter('name') || 'John Doe';
+            const email = getUrlParameter('email') || 'john.doe@example.com';
+            const department = getUrlParameter('department') || 'Engineering';
+            const idNumber = getUrlParameter('id') || 'EMP-2024-001';
+            const approvalDate = getUrlParameter('date') || new Date().toLocaleDateString('en-US', { 
+                year: 'numeric', 
+                month: 'short', 
+                day: 'numeric' 
+            });
+            const photoUrl = getUrlParameter('photo');
+
+            // Update display
+            document.getElementById('nameDisplay').textContent = name;
+            document.getElementById('emailDisplay').textContent = email;
+            document.getElementById('departmentDisplay').textContent = department;
+            document.getElementById('idNumberDisplay').textContent = idNumber;
+            document.getElementById('approvalDateDisplay').textContent = approvalDate;
+
+            // Handle photo
+            const photoDisplay = document.getElementById('photoDisplay');
+            if (photoUrl && photoUrl !== '') {
+                photoDisplay.innerHTML = `<img src="${photoUrl}" alt="ID Photo">`;
+            } else {
+                // Create initials from name
+                const nameParts = name.trim().split(' ');
+                const initials = nameParts.length >= 2 
+                    ? nameParts[0][0] + nameParts[nameParts.length - 1][0]
+                    : nameParts[0][0];
+                photoDisplay.textContent = initials.toUpperCase();
+            }
+        });
+    </script>
+</body>
+</html>
