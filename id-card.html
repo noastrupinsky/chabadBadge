@@ -178,12 +178,12 @@
                     <span class="info-value" id="emailDisplay">john.doe@example.com</span>
                 </div>
                 <div class="info-row">
-                    <span class="info-label">Department:</span>
-                    <span class="info-value" id="departmentDisplay">Engineering</span>
+                    <span class="info-label">NetID:</span>
+                    <span class="info-value" id="netidDisplay">jd123</span>
                 </div>
                 <div class="info-row">
-                    <span class="info-label">ID Number:</span>
-                    <span class="info-value" id="idNumberDisplay">EMP-2024-001</span>
+                    <span class="info-label">Phone:</span>
+                    <span class="info-value" id="phoneDisplay">(555) 123-4567</span>
                 </div>
                 <div class="info-row">
                     <span class="info-label">Approval Date:</span>
@@ -219,8 +219,9 @@
         window.addEventListener('DOMContentLoaded', function() {
             const name = getUrlParameter('name') || 'John Doe';
             const email = getUrlParameter('email') || 'john.doe@example.com';
-            const department = getUrlParameter('department') || 'Engineering';
-            const idNumber = getUrlParameter('id') || 'EMP-2024-001';
+            const netid = getUrlParameter('department') || 'jd123';
+            const phone = getUrlParameter('phone') || '';
+            const idNumber = getUrlParameter('id') || 'CHB-2024-001';
             const approvalDate = getUrlParameter('date') || new Date().toLocaleDateString('en-US', { 
                 year: 'numeric', 
                 month: 'short', 
@@ -231,8 +232,8 @@
             // Update display
             document.getElementById('nameDisplay').textContent = name;
             document.getElementById('emailDisplay').textContent = email;
-            document.getElementById('departmentDisplay').textContent = department;
-            document.getElementById('idNumberDisplay').textContent = idNumber;
+            document.getElementById('netidDisplay').textContent = netid;
+            document.getElementById('phoneDisplay').textContent = phone || 'N/A';
             document.getElementById('approvalDateDisplay').textContent = approvalDate;
 
             // Handle photo
